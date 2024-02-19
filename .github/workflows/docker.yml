@@ -6,10 +6,10 @@ on:
   workflow_dispatch:
   push:
     tags:
-      - v[0-9]+.*
+      - v[0-9]+.*-fnsa-[0-9]+.*
 
 env:
-  REGISTRY_IMAGE: informalsystems/hermes
+  REGISTRY_IMAGE: Finschia/hermes
 
 jobs:
   docker-build:
@@ -42,8 +42,8 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push by digest
         id: build
@@ -95,8 +95,8 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Create manifest list and push
         working-directory: /tmp/digests
